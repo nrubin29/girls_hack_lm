@@ -2,11 +2,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <link href="{% static 'bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'bootstrap.css' %}" rel="stylesheet"/>
 
     <style>
         body {
@@ -27,30 +27,39 @@
 
     {% block head %}
     {% endblock %}
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <ul class="navbar-nav mx-auto">
-            <li>
-                <a class="navbar-brand" href="#">girls.hack(LM)</a>
-            </li>
-        </ul>
-      </div>
-    </nav>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand{% if not me %} mx-auto{% endif %}" href="#">girls.hack(LM)</a>
+        {% if me %}
+            <ul class="nav navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ me.name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>
 
-    <main>
-        {% block body %}
-        {% endblock %}
-    </main>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
-
-    {% block script %}
+<main>
+    {% block body %}
     {% endblock %}
-  </body>
+</main>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"
+></script>
+
+{% block script %}
+{% endblock %}
+</body>
 </html>

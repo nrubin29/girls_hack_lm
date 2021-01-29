@@ -2,6 +2,12 @@
 
 {% block head %}
     <title>Competition - girls.hack(LM)</title>
+
+    <style>
+        .card {
+            width: 75vw;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +24,7 @@
     <br>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="problem" role="tabpanel" aria-labelledby="problem-tab">
-            <div class="card" style="width: 66vw;">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Tic-Tac-Toe</h5>
                     <p class="card-text">{% lorem 3 p %}</p>
@@ -26,7 +32,7 @@
                 </div>
             </div>
             <br>
-            <div class="card" style="width: 66vw;">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Submit</h5>
                     <div class="card-text">

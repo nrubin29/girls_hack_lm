@@ -20,5 +20,6 @@ from hackathon.views import *
 urlpatterns = [
     path('', home, name='home'),
     path('login', login, name='login'),
+    path('logout', logout, name='logout'),
     path('competitor', competitor, name='competitor'),
 ]

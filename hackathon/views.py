@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login as django_login
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
@@ -23,6 +23,11 @@ def login(request):
     template = loader.get_template('login.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
+
+def logout(request):
+    django_logout(request)
+    return HttpResponseRedirect(reverse('home'))
 
 
 def competitor(request):
