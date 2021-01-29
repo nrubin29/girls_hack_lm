@@ -18,5 +18,7 @@ from django.urls import path
 from hackathon.views import *
 
 urlpatterns = [
-    path('', home),
+    path('', home, name='home'),
+    path('login', login, name='login'),
+    path('problem', problem, name='problem'),
 ]

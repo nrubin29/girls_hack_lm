@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Login - girls.hack(LM)</title>
+
+    <style>
+        .card-title {
+            margin-bottom: 1rem;
+        }
+
+        button[type=submit] {
+            margin-top: 1rem;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 36rem;">
+      <div class="card-body">
+        <h5 class="card-title">Log in</h5>
+        <div class="card-text">
+          <form method="post">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+              <label for="username">Username</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+              <label for="password">Password</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}
