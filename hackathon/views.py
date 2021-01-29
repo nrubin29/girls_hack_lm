@@ -8,6 +8,9 @@ from hackathon.models import HackathonUser
 
 def home(request):
     if request.user.is_authenticated:
+        if HackathonUser.objects.get(user=request.user).is_grader:
+            return HttpResponseRedirect(reverse('grader'))
+
         return HttpResponseRedirect(reverse('competitor'))
 
     return HttpResponseRedirect(reverse('login'))
@@ -34,5 +37,14 @@ def competitor(request):
     template = loader.get_template('competitor.html')
     context = {
         'me': HackathonUser.objects.get(user=request.user)
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def grader(request):
+    template = loader.get_template('grader.html')
+    context = {
+        'me': HackathonUser.objects.get(user=request.user),
+        'submissions': range(6),
     }
     return HttpResponse(template.render(context, request))

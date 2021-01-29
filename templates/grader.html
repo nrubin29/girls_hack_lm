@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Grader - girls.hack(LM)</title>
+
+    <style>
+        .submissions {
+            width: 75vw;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="submissions row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for submission in submissions %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Noah Rubin <span class="badge rounded-pill bg-primary align-bottom float-end">2 grades</span></h5>
+                        <a href="#" class="btn btn-primary">Grade</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

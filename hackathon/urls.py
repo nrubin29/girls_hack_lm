@@ -22,4 +22,5 @@ urlpatterns = [
     path('login', login, name='login'),
     path('logout', logout, name='logout'),
     path('competitor', competitor, name='competitor'),
+    path('grader', grader, name='grader'),
 ]
