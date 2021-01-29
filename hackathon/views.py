@@ -8,7 +8,7 @@ from hackathon.models import HackathonUser
 
 def home(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('problem'))
+        return HttpResponseRedirect(reverse('competitor'))
 
     return HttpResponseRedirect(reverse('login'))
 
@@ -18,15 +18,15 @@ def login(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user and user.is_authenticated and user.is_active:
             django_login(request, user)
-            return HttpResponseRedirect(reverse('problem'))
+            return HttpResponseRedirect(reverse('competitor'))
 
     template = loader.get_template('login.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
 
-def problem(request):
-    template = loader.get_template('problem.html')
+def competitor(request):
+    template = loader.get_template('competitor.html')
     context = {
         'me': HackathonUser.objects.get(user=request.user)
     }

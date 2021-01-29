@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Competition - girls.hack(LM)</title>
+{% endblock %}
+
+{% block body %}
+    <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="problem-tab" data-bs-toggle="tab" href="#problem" role="tab"
+               aria-controls="problem" aria-selected="true">Problem</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="resources-tab" data-bs-toggle="tab" href="#resources" role="tab"
+               aria-controls="resources" aria-selected="false">Resources</a>
+        </li>
+    </ul>
+    <br>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="problem" role="tabpanel" aria-labelledby="problem-tab">
+            <div class="card" style="width: 66vw;">
+                <div class="card-body">
+                    <h5 class="card-title">Tic-Tac-Toe</h5>
+                    <p class="card-text">{% lorem 3 p %}</p>
+                    <a href="#" class="btn btn-primary">Download Starter Code</a>
+                </div>
+            </div>
+            <br>
+            <div class="card" style="width: 66vw;">
+                <div class="card-body">
+                    <h5 class="card-title">Submit</h5>
+                    <div class="card-text">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Zip file with code</label>
+                                <input class="form-control" type="file" id="file" accept="application/zip">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+            ...
+        </div>
+    </div>
+{% endblock %}
