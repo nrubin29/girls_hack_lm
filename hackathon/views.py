@@ -18,7 +18,7 @@ def login(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user and user.is_authenticated and user.is_active:
             django_login(request, user)
-            return HttpResponseRedirect(reverse('competitor'))
+            return HttpResponseRedirect(reverse('home'))
 
     template = loader.get_template('login.html')
     context = {}
