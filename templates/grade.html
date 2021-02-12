@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Grade {{ submission.team.name }} - girls.hack(LM)</title>
+    <style>
+        .card:not(:last-child) {
+            margin-bottom: 1em;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Rubric</h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>0 points</th>
+                            <th>1 point</th>
+                            <th>2 points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Function</th>
+                            <td>
+                                <input type="radio" name="function" id="function-0" value="0">
+                                <label for="function-0">xyz</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="function" id="function-1" value="1">
+                                <label for="function-1">abc</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="function" id="function-2" value="2">
+                                <label for="function-2">def</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Code Readability</th>
+                            <td>
+                                <input type="radio" name="readability" id="readability-0" value="0">
+                                <label for="readability-0">xyz</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="readability" id="readability-1" value="1">
+                                <label for="readability-1">abc</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="readability" id="readability-2" value="2">
+                                <label for="readability-2">def</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Design</th>
+                            <td>
+                                <input type="radio" name="design" id="design-0" value="0">
+                                <label for="design-0">xyz</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="design" id="design-1" value="1">
+                                <label for="design-1">abc</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="design" id="design-2" value="2">
+                                <label for="design-2">def</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Algorithm</th>
+                            <td>
+                                <input type="radio" name="algorithm" id="algorithm-0" value="0">
+                                <label for="algorithm-0">xyz</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="algorithm" id="algorithm-1" value="1">
+                                <label for="algorithm-1">abc</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="algorithm" id="algorithm-2" value="2">
+                                <label for="algorithm-2">def</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Comments</h5>
+                <textarea class="form-control" name="comments"></textarea>
+            </div>
+        </div>
+        <input type="hidden" name="submission" value="{{ submission.id }}">
+        <input type="hidden" name="grader" value="{{ me.id }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+{% endblock %}

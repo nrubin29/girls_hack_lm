@@ -22,7 +22,11 @@ class Submission(models.Model):
 class Grade(models.Model):
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
     grader = models.ForeignKey(HackathonUser, on_delete=models.CASCADE)
-    comments = models.TextField()
+    function = models.PositiveSmallIntegerField()
+    readability = models.PositiveSmallIntegerField()
+    design = models.PositiveSmallIntegerField()
+    algorithm = models.PositiveSmallIntegerField()
+    comments = models.TextField(blank=True)
 
     def __str__(self):
         return f'{self.submission.team.name} graded by {self.grader.name}'

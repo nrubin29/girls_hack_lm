@@ -23,4 +23,5 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('competitor', competitor, name='competitor'),
     path('grader', grader, name='grader'),
+    path('grade/<int:submission_id>', grade, name='grade'),
 ]
