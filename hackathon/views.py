@@ -1,10 +1,29 @@
+import functools
+
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
 from hackathon.forms import SubmissionForm
-from hackathon.models import HackathonUser
+from hackathon.models import HackathonUser, Submission
+
+
+def require_grader(view_func):
+    def wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            try:
+                me = HackathonUser.objects.get(user=request.user)
+
+                if me.is_grader:
+                    return view_func(*args, **kwargs)
+
+            except HackathonUser.DoesNotExist:
+                pass
+
+        return HttpResponseRedirect(reverse('home'))
+
+    return functools.wraps(view_func)(wrapped_view)
 
 
 def home(request):
@@ -58,10 +77,11 @@ def competitor(request):
     return HttpResponse(template.render(context, request))
 
 
+@require_grader
 def grader(request):
     template = loader.get_template('grader.html')
     context = {
         'me': HackathonUser.objects.get(user=request.user),
-        'submissions': range(6),
+        'submissions': Submission.objects.all(),
     }
     return HttpResponse(template.render(context, request))
