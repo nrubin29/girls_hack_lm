@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
+from hackathon.forms import SubmissionForm
 from hackathon.models import HackathonUser
 
 
@@ -34,9 +35,25 @@ def logout(request):
 
 
 def competitor(request):
+    success = None
+    errors = None
+
+    if request.method == 'POST':
+        form = SubmissionForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            success = True
+
+        else:
+            success = False
+            errors = form.errors
+
     template = loader.get_template('competitor.html')
     context = {
-        'me': HackathonUser.objects.get(user=request.user)
+        'me': HackathonUser.objects.get(user=request.user),
+        'success': success,
+        'errors': errors,
     }
     return HttpResponse(template.render(context, request))
 
