@@ -35,7 +35,7 @@
                 <h5 class="card-title">Code</h5>
                 <select class="form-select" aria-label="Select file">
                     {% for file_name, contents in files.items %}
-                        <option value="{{ contents }}" selected="{{ forloop.first }}">{{ file_name }}</option>
+                        <option value="file{{ forloop.counter }}" id="file{{ forloop.counter }}" data-contents="{{ contents }}">{{ file_name }}</option>
                     {% endfor %}
                 </select>
                 <textarea id="codeMirror"></textarea>
@@ -136,6 +136,8 @@
 {% block script %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static 'codemirror.js' %}"></script>
+    <script src="{% static 'clike.js' %}"></script>
+    <script src="{% static 'python.js' %}"></script>
     <script>
         $(document).ready(function() {
             const codeMirror = CodeMirror.fromTextArea(
@@ -144,7 +146,14 @@
             );
 
             $('select').change(function() {
-                codeMirror.setValue($('select').val());
+                const selectedIndex = $('select').val();
+                const selectedOption = $('#' + selectedIndex);
+                const fileName = selectedOption.text();
+
+                codeMirror.setValue(selectedOption.attr('data-contents'));
+                codeMirror.setOption('mode', fileName.endsWith('.py') ? 'text/x-python' :
+                    fileName.endsWith('.java') ? 'text/x-java' :
+                        'text/plain');
             }).change();
         });
     </script>
