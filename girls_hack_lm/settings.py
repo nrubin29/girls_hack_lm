@@ -25,7 +25,7 @@ SECRET_KEY = 'rc2&x$9hine$a6_@!@q5_#1)r&ir8r&9n1g4y%k=8x#e1y!mnm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hackathon.newwavecomputers.com', '127.0.0.1']
 
 
 # Application definition
@@ -119,8 +119,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+MEDIA_ROOT = BASE_DIR / 'media'  # .replace('\\', '/')
 MEDIA_URL = '/media/'

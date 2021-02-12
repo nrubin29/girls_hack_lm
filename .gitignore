@@ -1,5 +1,6 @@
 .idea
 db.sqlite3
+static/
 media/
 hackathon/static/.sass-cache
 hackathon/static/bootstrap
