@@ -1,4 +1,5 @@
 import functools
+from zipfile import ZipFile
 
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -102,10 +103,20 @@ def grade(request, submission_id):
         else:
             errors = form.errors
 
+    submission = Submission.objects.get(id=submission_id)
+    files = {}
+
+    with ZipFile(submission.file.file) as zip_file:
+        for inner_file in zip_file.infolist():
+            if not inner_file.is_dir():
+                with zip_file.open(inner_file.filename) as f:
+                    files[inner_file.filename] = f.read().decode()
+
     template = loader.get_template('grade.html')
     context = {
         'me': HackathonUser.objects.get(user=request.user),
-        'submission': Submission.objects.get(id=submission_id),
-        'errors': errors
+        'submission': submission,
+        'files': files,
+        'errors': errors,
     }
     return HttpResponse(template.render(context, request))
