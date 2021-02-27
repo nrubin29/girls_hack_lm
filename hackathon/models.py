@@ -24,8 +24,9 @@ class Grade(models.Model):
     grader = models.ForeignKey(HackathonUser, on_delete=models.CASCADE)
     function = models.PositiveSmallIntegerField()
     readability = models.PositiveSmallIntegerField()
-    design = models.PositiveSmallIntegerField()
-    algorithm = models.PositiveSmallIntegerField()
+    implementation = models.PositiveSmallIntegerField()
+    creativity = models.PositiveSmallIntegerField()
+    educational = models.PositiveSmallIntegerField()
     comments = models.TextField(blank=True)
 
     def __str__(self):
