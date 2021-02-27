@@ -31,7 +31,10 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand{% if not me %} mx-auto{% endif %}" href="{% url 'home' %}">girls.hack(LM)</a>
+        <a class="navbar-brand{% if not me %} mx-auto{% endif %}" href="{% url 'home' %}">
+            <img src="{% static 'logo.svg' %}" height="32px">
+            girls.hack(LM)
+        </a>
         {% if me %}
             <ul class="nav navbar-nav">
                 <li class="nav-item dropdown">
