@@ -26,6 +26,7 @@
                             <span class="badge rounded-pill bg-primary align-bottom float-end">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>
                         </h5>
                         <a href="{% url 'grade' submission.id %}" class="btn btn-primary">Grade</a>
+                        <a href="{{ submission.file.url }}" class="btn btn-primary">Download .zip</a>
                     </div>
                 </div>
             </div>
