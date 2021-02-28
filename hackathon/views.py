@@ -7,20 +7,13 @@ from django.template import loader
 from django.urls import reverse
 
 from hackathon.forms import SubmissionForm, GradeForm
-from hackathon.models import HackathonUser, Submission
+from hackathon.models import HackathonUser, Submission, Grader
 
 
 def require_grader(view_func):
     def wrapped_view(request, *args, **kwargs):
-        if request.user.is_authenticated:
-            try:
-                me = HackathonUser.objects.get(user=request.user)
-
-                if me.is_grader:
-                    return view_func(request, *args, **kwargs)
-
-            except HackathonUser.DoesNotExist:
-                pass
+        if request.user.is_authenticated and Grader.objects.filter(django_user=request.user).exists():
+            return view_func(request, *args, **kwargs)
 
         return HttpResponseRedirect(reverse('home'))
 
@@ -29,7 +22,7 @@ def require_grader(view_func):
 
 def home(request):
     if request.user.is_authenticated:
-        if HackathonUser.objects.get(user=request.user).is_grader:
+        if type(HackathonUser.get_for(request.user)) == Grader:
             return HttpResponseRedirect(reverse('grader'))
 
         return HttpResponseRedirect(reverse('competitor'))
@@ -71,7 +64,7 @@ def competitor(request):
 
     template = loader.get_template('competitor.html')
     context = {
-        'me': HackathonUser.objects.get(user=request.user),
+        'me': HackathonUser.get_for(request.user),
         'success': success,
         'errors': errors,
     }
@@ -82,7 +75,7 @@ def competitor(request):
 def grader(request):
     template = loader.get_template('grader.html')
     context = {
-        'me': HackathonUser.objects.get(user=request.user),
+        'me': HackathonUser.get_for(request.user),
         'submissions': Submission.objects.all(),
         'graded': 'graded' in request.GET,
     }
@@ -114,7 +107,7 @@ def grade(request, submission_id):
 
     template = loader.get_template('grade.html')
     context = {
-        'me': HackathonUser.objects.get(user=request.user),
+        'me': HackathonUser.get_for(request.user),
         'submission': submission,
         'files': files,
         'errors': errors,

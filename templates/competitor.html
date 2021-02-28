@@ -83,7 +83,7 @@
                                 <label for="file" class="form-label">Zip file with code</label>
                                 <input class="form-control" type="file" id="file" name="file" accept="application/zip">
                             </div>
-                            <input type="hidden" name="team" value="{{ me.id }}">
+                            <input type="hidden" name="team" value="{{ me.team.id }}">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             {% csrf_token %}
                         </form>
