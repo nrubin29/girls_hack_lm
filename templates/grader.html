@@ -4,13 +4,8 @@
     <title>Grader - girls.hack(LM)</title>
 
     <style>
-        body {
-            height: 100vh;
-            margin-bottom: 0;
-        }
-
-        .submissions {
-            width: 75vw;
+        td {
+            vertical-align: middle;
         }
     </style>
 {% endblock %}
@@ -21,20 +16,29 @@
             Your grade has been submitted!
         </div>
     {% endif %}
-    <div class="submissions row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
-        {% for submission in submissions %}
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{ submission.team }}
-                            <span class="badge rounded-pill bg-primary align-bottom float-end">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>
-                        </h5>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th width="60%">Team</th>
+                <th width="15%">Grades</th>
+                <th width="25%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for submission in submissions %}
+                <tr>
+                    <td>{{ submission.team }}</td>
+                    <td>
+                        <span class="badge rounded-pill bg-primary align-bottom">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>
+                    </td>
+                    <td>
                         <a href="{% url 'grade' submission.id %}" class="btn btn-primary">Grade</a>
                         <a href="{{ submission.file.url }}" class="btn btn-primary">Download .zip</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
