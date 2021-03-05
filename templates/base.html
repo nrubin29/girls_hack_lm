@@ -9,6 +9,11 @@
     <link href="{% static 'bootstrap.css' %}" rel="stylesheet"/>
 
     <style>
+        @font-face {
+            font-family: 'Forced Square';
+            src: url("{% static 'forced_square.ttf' %}");
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -18,6 +23,11 @@
 
         .navbar {
             margin-bottom: 1em;
+        }
+
+        .navbar-brand {
+            font-family: 'Forced Square', serif;
+            font-size: 1.5em;
         }
 
         main {
