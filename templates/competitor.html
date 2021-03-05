@@ -78,6 +78,12 @@
                 <div class="card-body">
                     <h5 class="card-title">Submit</h5>
                     <div class="card-text">
+                        {% if has_submission %}
+                            <div class="alert alert-primary">
+                                Someone from your team has already made a submission. If you make a new submission, it will
+                                overwrite the old one.
+                            </div>
+                        {% endif %}
                         <form method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="file" class="form-label">Zip file with code</label>

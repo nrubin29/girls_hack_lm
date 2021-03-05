@@ -54,19 +54,26 @@ def competitor(request):
     if request.method == 'POST':
         form = SubmissionForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            form.save()
-            success = True
-
-        else:
+        if not form.is_valid():
             success = False
             errors = form.errors
 
+        else:
+            old_submission = Submission.objects.filter(team_id=request.POST['team'])
+            if old_submission.exists():
+                old_submission.delete()
+
+            form.save()
+            success = True
+
+    me = HackathonUser.get_for(request.user)
+
     template = loader.get_template('competitor.html')
     context = {
-        'me': HackathonUser.get_for(request.user),
+        'me': me,
         'success': success,
         'errors': errors,
+        'has_submission': Submission.objects.filter(team=me.team).exists()
     }
     return HttpResponse(template.render(context, request))
 
