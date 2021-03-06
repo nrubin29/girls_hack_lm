@@ -42,6 +42,15 @@ class Submission(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     file = models.FileField()
 
+    @property
+    def score(self):
+        grades = list(self.grade_set.all())
+
+        if not grades:
+            return '--'
+
+        return sum(map(lambda grade: grade.score, grades)) / len(grades)
+
     def __str__(self):
         return f'{self.team} : {self.file.name}'
 
@@ -55,6 +64,10 @@ class Grade(models.Model):
     creativity = models.PositiveSmallIntegerField()
     educational = models.PositiveSmallIntegerField()
     comments = models.TextField(blank=True)
+
+    @property
+    def score(self):
+        return self.function + self.readability + self.implementation + self.creativity + self.educational
 
     def __str__(self):
         return f'{self.submission.team} graded by {self.grader.name}'
