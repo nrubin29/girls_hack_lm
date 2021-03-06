@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load hackathon_extras %}
 
 {% block head %}
     <title>Grader - girls.hack(LM)</title>
@@ -33,7 +34,7 @@
                         <span class="badge rounded-pill bg-primary align-bottom">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>
                     </td>
                     <td>
-                        <a href="{% url 'grade' submission.id %}" class="btn btn-primary">Grade</a>
+                        <a href="{% url 'grade' submission.id %}" class="btn btn-primary">{% if submission|graded_by:me %}Edit {% endif %}Grade</a>
                         <a href="{{ submission.file.url }}" class="btn btn-primary">Download .zip</a>
                     </td>
                 </tr>

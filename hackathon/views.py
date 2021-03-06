@@ -7,7 +7,7 @@ from django.template import loader
 from django.urls import reverse
 
 from hackathon.forms import SubmissionForm, GradeForm
-from hackathon.models import HackathonUser, Submission, Grader
+from hackathon.models import HackathonUser, Submission, Grader, Grade
 
 
 def require_grader(view_func):
@@ -91,19 +91,28 @@ def grader(request):
 
 @require_grader
 def grade(request, submission_id):
+    submission = Submission.objects.get(id=submission_id)
+    me = HackathonUser.get_for(request.user)
+    try:
+        old_grade = Grade.objects.get(submission=submission, grader=me)
+    except Grade.DoesNotExist:
+        old_grade = None
+
     errors = None
 
     if request.method == 'POST':
         form = GradeForm(request.POST, request.FILES)
 
         if form.is_valid():
+            if old_grade:
+                old_grade.delete()
+
             form.save()
             return HttpResponseRedirect(reverse('grader') + '?graded=true')
 
         else:
             errors = form.errors
 
-    submission = Submission.objects.get(id=submission_id)
     files = {}
 
     with ZipFile(submission.file.file) as zip_file:
@@ -114,9 +123,10 @@ def grade(request, submission_id):
 
     template = loader.get_template('grade.html')
     context = {
-        'me': HackathonUser.get_for(request.user),
+        'me': me,
         'submission': submission,
         'files': files,
+        'old_grade': old_grade,
         'errors': errors,
     }
     return HttpResponse(template.render(context, request))

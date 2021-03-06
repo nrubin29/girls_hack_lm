@@ -62,7 +62,7 @@
                         <tr>
                             <th>Function</th>
                             <td>
-                                <input type="radio" name="function" id="function-0" value="0">
+                                <input type="radio" name="function" id="function-0" value="0"{% if old_grade.function == 0 %}checked{% endif %}>
                                 <label for="function-0">
                                     <ul class="list-group">
                                       <li class="list-group-item">A program solution is submitted but fails to compile.</li>
@@ -72,7 +72,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="function" id="function-1" value="1">
+                                <input type="radio" name="function" id="function-1" value="1"{% if old_grade.function == 1 %}checked{% endif %}>
                                 <label for="function-1">
                                     <ul class="list-group">
                                       <li class="list-group-item">The submitted program compiles successfully.</li>
@@ -83,7 +83,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="function" id="function-2" value="2">
+                                <input type="radio" name="function" id="function-2" value="2"{% if old_grade.function == 2 %}checked{% endif %}>
                                 <label for="function-2">
                                     <ul class="list-group">
                                       <li class="list-group-item">The submitted program compiles successfully.</li>
@@ -96,7 +96,7 @@
                         <tr>
                             <th>Code Readability</th>
                             <td>
-                                <input type="radio" name="readability" id="readability-0" value="0">
+                                <input type="radio" name="readability" id="readability-0" value="0"{% if old_grade.readability == 0 %}checked{% endif %}>
                                 <label for="readability-0">
                                     <ul class="list-group">
                                       <li class="list-group-item">Code contains no documentation.</li>
@@ -106,7 +106,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="readability" id="readability-1" value="1">
+                                <input type="radio" name="readability" id="readability-1" value="1"{% if old_grade.readability == 1 %}checked{% endif %}>
                                 <label for="readability-1">
                                     <ul class="list-group">
                                       <li class="list-group-item">The submitted project is inconsistently documented.</li>
@@ -116,7 +116,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="readability" id="readability-2" value="2">
+                                <input type="radio" name="readability" id="readability-2" value="2"{% if old_grade.readability == 2 %}checked{% endif %}>
                                 <label for="readability-2">
                                     <ul class="list-group">
                                       <li class="list-group-item">The submitted project is well documented.</li>
@@ -129,7 +129,7 @@
                         <tr>
                             <th>Implementation</th>
                             <td>
-                                <input type="radio" name="implementation" id="implementation-0" value="0">
+                                <input type="radio" name="implementation" id="implementation-0" value="0"{% if old_grade.implementation == 0 %}checked{% endif %}>
                                 <label for="implementation-0=">
                                     <ul class="list-group">
                                       <li class="list-group-item">Code shows little to no thought about design.</li>
@@ -138,7 +138,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="implementation" id="implementation-1" value="1">
+                                <input type="radio" name="implementation" id="implementation-1" value="1"{% if old_grade.implementation == 1 %}checked{% endif %}>
                                 <label for="implementation-1">
                                     <ul class="list-group">
                                       <li class="list-group-item">Code shows some thought about design.</li>
@@ -147,7 +147,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="implementation" id="implementation-2" value="2">
+                                <input type="radio" name="implementation" id="implementation-2" value="2"{% if old_grade.implementation == 2 %}checked{% endif %}>
                                 <label for="implementation-2">
                                     <ul class="list-group">
                                       <li class="list-group-item">The program effectively chooses and implements concepts that would best model and solve the problem.</li>
@@ -160,7 +160,7 @@
                         <tr>
                             <th>Creativity</th>
                             <td>
-                                <input type="radio" name="creativity" id="creativity-0" value="0">
+                                <input type="radio" name="creativity" id="creativity-0" value="0"{% if old_grade.creativity == 0 %}checked{% endif %}>
                                 <label for="creativity-0">
                                     <ul class="list-group">
                                       <li class="list-group-item">Your game implements very few creative elements outside of what was included with the starter code.</li>
@@ -168,7 +168,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="creativity" id="creativity-1" value="1">
+                                <input type="radio" name="creativity" id="creativity-1" value="1"{% if old_grade.creativity == 1 %}checked{% endif %}>
                                 <label for="creativity-1">
                                     <ul class="list-group">
                                       <li class="list-group-item">Your game begins to implement elements of creative game play outside of what was included with the starter code.</li>
@@ -176,7 +176,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="creativity" id="creativity-2" value="2">
+                                <input type="radio" name="creativity" id="creativity-2" value="2"{% if old_grade.creativity == 2 %}checked{% endif %}>
                                 <label for="creativity-2">
                                     <ul class="list-group">
                                       <li class="list-group-item">The game makes creative use of story or game play.</li>
@@ -188,7 +188,7 @@
                         <tr>
                             <th>Fun or Educational</th>
                             <td>
-                                <input type="radio" name="educational" id="educational-0" value="0">
+                                <input type="radio" name="educational" id="educational-0" value="0"{% if old_grade.educational == 0 %}checked{% endif %}>
                                 <label for="educational-0">
                                     <ul class="list-group">
                                       <li class="list-group-item">The game is neither fun to play nor demonstrates an educational purpose.</li>
@@ -196,7 +196,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="educational" id="educational-1" value="1">
+                                <input type="radio" name="educational" id="educational-1" value="1"{% if old_grade.educational == 1 %}checked{% endif %}>
                                 <label for="educational-1">
                                     <ul class="list-group">
                                       <li class="list-group-item">The game is somewhat fun to play or begins to demonstrate an educational purpose.</li>
@@ -204,7 +204,7 @@
                                 </label>
                             </td>
                             <td>
-                                <input type="radio" name="educational" id="educational-2" value="2">
+                                <input type="radio" name="educational" id="educational-2" value="2"{% if old_grade.educational == 2 %}checked{% endif %}>
                                 <label for="educational-2">
                                     <ul class="list-group">
                                       <li class="list-group-item">The game is fun to play or communicates an educational purpose.</li>
@@ -219,7 +219,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Comments</h5>
-                    <textarea class="form-control" name="comments"></textarea>
+                    <textarea class="form-control" name="comments">{{ old_grade.comments }}</textarea>
                 </div>
             </div>
             <input type="hidden" name="submission" value="{{ submission.id }}">
