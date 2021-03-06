@@ -26,6 +26,29 @@ class HackathonUser(models.Model):
 
 
 class Team(models.Model):
+    @property
+    def score(self):
+        score = 0
+
+        try:
+            score += Submission.objects.get(team=self).score
+        except Submission.DoesNotExist:
+            pass
+
+        for competitor in self.competitor_set.all():
+            try:
+                bonus_image = BonusImage.objects.get(competitor=competitor)
+                if bonus_image.approved:
+                    score += 1
+                    break
+            except BonusImage.DoesNotExist:
+                pass
+
+        if not score:
+            return '--'
+
+        return score
+
     def __str__(self):
         return ', '.join(self.competitor_set.values_list('name', flat=True))
 
@@ -47,7 +70,7 @@ class Submission(models.Model):
         grades = list(self.grade_set.all())
 
         if not grades:
-            return '--'
+            return 0
 
         return sum(map(lambda grade: grade.score, grades)) / len(grades)
 
@@ -76,3 +99,12 @@ class Grade(models.Model):
 
     def __str__(self):
         return f'{self.submission.team} graded by {self.grader.name}'
+
+
+class BonusImage(models.Model):
+    competitor = models.ForeignKey(Competitor, on_delete=models.CASCADE)
+    image = models.ImageField()
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.competitor.name

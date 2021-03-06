@@ -1,0 +1,82 @@
+{% extends 'competitor/competitor.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Problem - girls.hack(LM)</title>
+{% endblock %}
+
+{% block competitor_body %}
+    {% if success == True %}
+        <div class="alert alert-primary" role="alert">
+            Your file has been successfully submitted!
+        </div>
+    {% elif success == False %}
+        <div class="alert alert-danger" role="alert">
+            {{ errors | safe }}
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tic-Tac-Toe</h5>
+                <p class="card-text">
+                    Welcome to this year’s virtual girls.hack(“LM”)! Today you will work with your team to code a
+                    unique and creative version of a popular game. Starter code will be provided to you in python or
+                    java so that you can work in the coding language that you are comfortable with.
+                    <br><br>
+                    You and your team members will be coding tic-tac-toe. You can do as much as you want with this,
+                    stopping at just the original game, or adding some kind of variation to this childhood classic.
+                    Some examples include: Nine Men’s Morris, Ultimate tic-tac-toe, and Sequence. Your team will
+                    decide how to go about this, whether your solution be point-click with AI (Artificial
+                    Intelligence), a Choose-Your-Own-Adventure (Text-Based) game, or some other version. Your work
+                    must be submitted by 5 o’clock.
+                    <br><br>
+                    Within the comments of the starter code, you will find information and details describing the
+                    individual sections. Additionally, there will be different student-led lessons throughout the
+                    day going through the starter code and explaining coding techniques such as AI, graphics, and
+                    arrays. These lessons are meant to help you succeed in the project no matter your current
+                    computer science level, so please take advantage of these if you feel you would benefit from
+                    them. Lastly, there will be a help desk available at all times if you encounter any problems,
+                    need help troubleshooting, or have any general coding or competition questions. At the end of
+                    the competition, your program will be judged on creativity and functionality. So make sure to
+                    brainstorm some crazy ideas in the beginning.
+                    <br><br>
+                    Happy Coding!
+                </p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Download Starter Code
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% static 'tic-tac-toe-java.zip' %}">Java</a></li>
+                        <li><a class="dropdown-item" href="{% static 'tic-tac-toe-python.zip' %}">Python</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Submit</h5>
+                <div class="card-text">
+                    {% if has_submission %}
+                        <div class="alert alert-primary">
+                            Someone from your team has already made a submission. If you make a new submission, it will
+                            overwrite the old one.
+                        </div>
+                    {% endif %}
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Zip file with code</label>
+                            <input class="form-control" type="file" id="file" name="file" accept="application/zip">
+                        </div>
+                        <input type="hidden" name="team" value="{{ me.team.id }}">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'competitor/competitor.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Bonus Image - girls.hack(LM)</title>
+{% endblock %}
+
+{% block competitor_body %}
+    {% if success == True %}
+        <div class="alert alert-primary" role="alert">
+            Your image has been successfully uploaded!
+        </div>
+    {% elif success == False %}
+        <div class="alert alert-danger" role="alert">
+            {{ errors | safe }}
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bonus Image</h5>
+                <div class="card-text">
+                    Upload an image of yourself participating in the event! If at least one person from your team
+                    uploads a picture, your team will get a bonus point.
+                    <br><br>
+                    {% if has_bonus_image %}
+                        <div class="alert alert-primary">
+                            You have already uploaded an image. If you upload a new image, it will overwrite the old
+                            one and the new image will have to be approved.
+                        </div>
+                    {% endif %}
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                        </div>
+                        <input type="hidden" name="competitor" value="{{ me.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

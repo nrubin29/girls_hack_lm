@@ -31,7 +31,7 @@
             {% for submission in submissions %}
                 <tr>
                     <td>{{ submission.team }}</td>
-                    <td><span class="badge rounded-pill bg-primary">{{ submission.score }}</span></td>
+                    <td><span class="badge rounded-pill bg-primary">{{ submission.team.score }}</span></td>
                     <td>
                         <span class="badge rounded-pill bg-primary">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>
                     </td>
