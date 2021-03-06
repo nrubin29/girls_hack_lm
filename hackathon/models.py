@@ -59,11 +59,16 @@ class Grade(models.Model):
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
     grader = models.ForeignKey(Grader, on_delete=models.CASCADE)
     function = models.PositiveSmallIntegerField()
+    function_comments = models.TextField(blank=True)
     readability = models.PositiveSmallIntegerField()
+    readability_comments = models.TextField(blank=True)
     implementation = models.PositiveSmallIntegerField()
+    implementation_comments = models.TextField(blank=True)
     creativity = models.PositiveSmallIntegerField()
+    creativity_comments = models.TextField(blank=True)
     educational = models.PositiveSmallIntegerField()
-    comments = models.TextField(blank=True)
+    educational_comments = models.TextField(blank=True)
+    general_comments = models.TextField(blank=True)
 
     @property
     def score(self):

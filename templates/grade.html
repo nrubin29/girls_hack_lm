@@ -94,6 +94,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Function Comments</th>
+                            <td colspan="3">
+                                <textarea class="form-control" name="function_comments" rows="3">{{ old_grade.function_comments }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Code Readability</th>
                             <td>
                                 <input type="radio" name="readability" id="readability-0" value="0"{% if old_grade.readability == 0 %}checked{% endif %}>
@@ -127,10 +133,16 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Code Readability Comments</th>
+                            <td colspan="3">
+                                <textarea class="form-control" name="readability_comments" rows="3">{{ old_grade.readability_comments }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Implementation</th>
                             <td>
                                 <input type="radio" name="implementation" id="implementation-0" value="0"{% if old_grade.implementation == 0 %}checked{% endif %}>
-                                <label for="implementation-0=">
+                                <label for="implementation-0">
                                     <ul class="list-group">
                                       <li class="list-group-item">Code shows little to no thought about design.</li>
                                       <li class="list-group-item">Structures and data types are poorly chosen.</li>
@@ -155,6 +167,12 @@
                                       <li class="list-group-item">Code uses the most appropriate structures (i.e. inheritance, interfaces, recursion, etc.)</li>
                                     </ul>
                                 </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Implementation Comments</th>
+                            <td colspan="3">
+                                <textarea class="form-control" name="implementation_comments" rows="3">{{ old_grade.implementation_comments }}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -186,6 +204,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Creativity Comments</th>
+                            <td colspan="3">
+                                <textarea class="form-control" name="creativity_comments" rows="3">{{ old_grade.creativity_comments }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Fun or Educational</th>
                             <td>
                                 <input type="radio" name="educational" id="educational-0" value="0"{% if old_grade.educational == 0 %}checked{% endif %}>
@@ -212,14 +236,20 @@
                                 </label>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Fun or Educational Comments</th>
+                            <td colspan="3">
+                                <textarea class="form-control" name="educational_comments" rows="3">{{ old_grade.educational_comments }}</textarea>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Comments</h5>
-                    <textarea class="form-control" name="comments">{{ old_grade.comments }}</textarea>
+                    <h5 class="card-title">General Comments</h5>
+                    <textarea class="form-control" name="general_comments" rows="5">{{ old_grade.general_comments }}</textarea>
                 </div>
             </div>
             <input type="hidden" name="submission" value="{{ submission.id }}">
