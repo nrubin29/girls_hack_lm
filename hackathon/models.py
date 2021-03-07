@@ -108,3 +108,15 @@ class BonusImage(models.Model):
 
     def __str__(self):
         return self.competitor.name
+
+
+class Settings(models.Model):
+    class Status(models.TextChoices):
+        closed = 'C', 'Closed'
+        open = 'O', 'Open'
+        ended = 'E', 'Ended'
+
+    status = models.CharField(choices=Status.choices, default='C', max_length=1)
+
+    def __str__(self):
+        return 'Settings'

@@ -20,6 +20,11 @@
 {% endblock %}
 
 {% block body %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
     <div class="card" style="width: 36rem;">
       <div class="card-body">
         <h5 class="card-title">Log in</h5>

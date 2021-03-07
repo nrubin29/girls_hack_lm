@@ -9,7 +9,7 @@ from django.template import loader
 from django.urls import reverse
 
 from hackathon.forms import SubmissionForm, GradeForm, BonusImageForm
-from hackathon.models import HackathonUser, Submission, Grader, Grade, BonusImage, Competitor
+from hackathon.models import HackathonUser, Submission, Grader, Grade, BonusImage, Competitor, Settings
 
 
 def require_user(model: Type[Model]):
@@ -43,17 +43,27 @@ def home(request):
 
 
 def login(request):
+    error = None
+
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('home'))
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user and user.is_authenticated and user.is_active:
-            django_login(request, user)
-            return HttpResponseRedirect(reverse('home'))
+            if not user.is_staff:
+                settings = Settings.objects.get()
+                if settings.status == 'C':
+                    error = 'You cannot log in at this time.'
+
+            if not error:
+                django_login(request, user)
+                return HttpResponseRedirect(reverse('home'))
 
     template = loader.get_template('login.html')
-    context = {}
+    context = {
+        'error': error
+    }
     return HttpResponse(template.render(context, request))
 
 
