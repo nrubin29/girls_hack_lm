@@ -31,7 +31,10 @@ require_competitor = require_user(Competitor)
 
 def home(request):
     if request.user.is_authenticated:
-        if type(HackathonUser.get_for(request.user)) == Grader:
+        if request.user.is_staff:
+            return HttpResponseRedirect('/admin')
+
+        elif type(HackathonUser.get_for(request.user)) == Grader:
             return HttpResponseRedirect(reverse('grader'))
 
         return HttpResponseRedirect(reverse('competitor'))
@@ -40,6 +43,9 @@ def home(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user and user.is_authenticated and user.is_active:
