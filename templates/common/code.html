@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Code</h5>
+        <select class="form-select code-select" aria-label="Select file">
+            {% for file_name, contents in submission.contents.items %}
+                <option value="file{{ forloop.counter }}" id="file{{ forloop.counter }}"
+                        data-contents="{{ contents }}">{{ file_name }}</option>
+            {% endfor %}
+        </select>
+        <textarea id="codeMirror"></textarea>
+        <br>
+        <a href="{{ submission.file.url }}" class="btn btn-primary">Download .zip</a>
+    </div>
+</div>

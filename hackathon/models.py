@@ -1,3 +1,5 @@
+from zipfile import ZipFile
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -73,6 +75,18 @@ class Submission(models.Model):
             return 0
 
         return sum(map(lambda grade: grade.score, grades)) / len(grades)
+
+    @property
+    def contents(self):
+        files = {}
+
+        with ZipFile(self.file.file) as zip_file:
+            for inner_file in zip_file.infolist():
+                if not inner_file.is_dir():
+                    with zip_file.open(inner_file.filename) as f:
+                        files[inner_file.filename] = f.read().decode()
+
+        return files
 
     def __str__(self):
         return f'{self.team} : {self.file.name}'

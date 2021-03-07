@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>End - girls.hack(LM)</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% include 'common/code.html' with submission=submission %}
+        {% for grade in submission.grade_set.all %}
+            {% include 'common/grade.html' with grade=grade disabled=True %}
+        {% endfor %}
+    </div>
+{% endblock %}

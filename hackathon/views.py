@@ -74,6 +74,11 @@ def logout(request):
 
 @require_competitor
 def competitor(request):
+    settings = Settings.objects.get()
+
+    if settings.status == 'E':
+        return end(request)
+
     success = None
     errors = None
 
@@ -101,6 +106,17 @@ def competitor(request):
         'errors': errors,
         'has_submission': Submission.objects.filter(team=me.team).exists(),
         'page': 'problem',
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def end(request):
+    me = HackathonUser.get_for(request.user)
+
+    template = loader.get_template('competitor/end.html')
+    context = {
+        'me': me,
+        'submission': Submission.objects.get(team=me.team),
     }
     return HttpResponse(template.render(context, request))
 
@@ -154,9 +170,9 @@ def grade(request, submission_id):
     submission = Submission.objects.get(id=submission_id)
     me = HackathonUser.get_for(request.user)
     try:
-        old_grade = Grade.objects.get(submission=submission, grader=me)
+        grade = Grade.objects.get(submission=submission, grader=me)
     except Grade.DoesNotExist:
-        old_grade = None
+        grade = None
 
     errors = None
 
@@ -164,8 +180,8 @@ def grade(request, submission_id):
         form = GradeForm(request.POST, request.FILES)
 
         if form.is_valid():
-            if old_grade:
-                old_grade.delete()
+            if grade:
+                grade.delete()
 
             form.save()
             return HttpResponseRedirect(reverse('grader') + '?graded=true')
@@ -173,20 +189,11 @@ def grade(request, submission_id):
         else:
             errors = form.errors
 
-    files = {}
-
-    with ZipFile(submission.file.file) as zip_file:
-        for inner_file in zip_file.infolist():
-            if not inner_file.is_dir():
-                with zip_file.open(inner_file.filename) as f:
-                    files[inner_file.filename] = f.read().decode()
-
     template = loader.get_template('grade.html')
     context = {
         'me': me,
         'submission': submission,
-        'files': files,
-        'old_grade': old_grade,
+        'grade': grade,
         'errors': errors,
     }
     return HttpResponse(template.render(context, request))
