@@ -83,8 +83,14 @@ class Submission(models.Model):
         with ZipFile(self.file.file) as zip_file:
             for inner_file in zip_file.infolist():
                 if not inner_file.is_dir():
-                    with zip_file.open(inner_file.filename) as f:
-                        files[inner_file.filename] = f.read().decode()
+                    file_name = inner_file.filename.split('/')[-1]
+
+                    if not file_name.startswith('.') and (file_name.endswith('.py') or file_name.endswith('.java')):
+                        with zip_file.open(inner_file.filename) as f:
+                            try:
+                                files[inner_file.filename] = f.read().decode()
+                            except UnicodeDecodeError:
+                                files[inner_file.filename] = 'An error occurred while decoding this file.'
 
         return files
 
