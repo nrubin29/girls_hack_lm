@@ -5,9 +5,10 @@
             <thead>
             <tr>
                 <th width="10%">Category</th>
-                <th width="30%">0 points</th>
-                <th width="30%">1 point</th>
-                <th width="30%">2 points</th>
+                <th width="22.5%">0 points</th>
+                <th width="22.5%">1 point</th>
+                <th width="22.5%">2 points</th>
+                <th width="22.5%">3 points</th>
             </tr>
             </thead>
             <tbody>
@@ -18,11 +19,7 @@
                            {% if grade.function == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="function-0">
                         <ul class="list-group">
-                            <li class="list-group-item">A program solution is submitted but fails to compile.</li>
-                            <li class="list-group-item">-- or --</li>
-                            <li class="list-group-item">The submitted program compiles successfully but does not
-                                implement your project as designed
-                            </li>
+                            <li class="list-group-item">The submitted program does not compile.</li>
                         </ul>
                     </label>
                 </td>
@@ -31,11 +28,7 @@
                            {% if grade.function == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="function-1">
                         <ul class="list-group">
-                            <li class="list-group-item">The submitted program compiles successfully.</li>
-                            <li class="list-group-item">The submitted program includes run-time
-                                and/or logic errors
-                            </li>
-                            <li class="list-group-item">Implementation is incomplete.</li>
+                            <li class="list-group-item">The submitted program compiles but there are major problems which make it impossible to play the game.</li>
                         </ul>
                     </label>
                 </td>
@@ -45,34 +38,85 @@
                     <label for="function-2">
                         <ul class="list-group">
                             <li class="list-group-item">The submitted program compiles successfully.</li>
-                            <li class="list-group-item">The submitted program is free of run-time and logic
-                                errors.
-                            </li>
-                            <li class="list-group-item">Your code fully implements the your project as designed.
-                            </li>
+                            <li class="list-group-item">The submitted program runs with a few logic errors.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="function" id="function-3" value="3"
+                           {% if grade.function == 3 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="function-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">The submitted program compiles successfully.</li>
+                            <li class="list-group-item">Your code runs without any run-time or logic errors.</li>
                         </ul>
                     </label>
                 </td>
             </tr>
             <tr>
                 <th>Function Comments</th>
-                <td colspan="3">
+                <td colspan="4">
                         <textarea class="form-control" name="function_comments"
                                   rows="3" {% if disabled %}disabled{% endif %}>{{ grade.function_comments }}</textarea>
                 </td>
             </tr>
             <tr>
-                <th>Code Readability</th>
+                <th>Creativity</th>
+                <td>
+                    <input type="radio" name="creativity" id="creativity-0" value="0"
+                           {% if grade.creativity == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="creativity-0">
+                        <ul class="list-group">
+                            <li class="list-group-item">The project contains no changes from original starter code.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="creativity" id="creativity-1" value="1"
+                           {% if grade.creativity == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="creativity-1">
+                        <ul class="list-group">
+                            <li class="list-group-item">Project shows very few changes from starter code.</li>
+                            <li class="list-group-item">Idea is not fully developed.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="creativity" id="creativity-2" value="2"
+                           {% if grade.creativity == 2 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="creativity-2">
+                        <ul class="list-group">
+                            <li class="list-group-item">Project has some unique aspects but does not venture far beyond the starter code.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="creativity" id="creativity-3" value="3"
+                           {% if grade.creativity == 3 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="creativity-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">Project is unique and demonstrates interesting concepts that go beyond the scope of the starter code.</li>
+                        </ul>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>Creativity Comments</th>
+                <td colspan="4">
+                        <textarea class="form-control" name="creativity_comments"
+                                  rows="3"
+                                  {% if disabled %}disabled{% endif %}>{{ grade.creativity_comments }}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>Readability</th>
                 <td>
                     <input type="radio" name="readability" id="readability-0" value="0"
                            {% if grade.readability == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="readability-0">
                         <ul class="list-group">
-                            <li class="list-group-item">Code contains no documentation.</li>
-                            <li class="list-group-item">Code is unformatted and is difficult to read.</li>
-                            <li class="list-group-item">Variables are ambiguous (i.e. x) and do not indicate the
-                                purpose of the variable.
-                            </li>
+                            <li class="list-group-item">Code contains no documentation (comments).</li>
+                            <li class="list-group-item">The code is impossible to comprehend.</li>
                         </ul>
                     </label>
                 </td>
@@ -81,13 +125,9 @@
                            {% if grade.readability == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="readability-1">
                         <ul class="list-group">
-                            <li class="list-group-item">The submitted project is inconsistently documented.</li>
-                            <li class="list-group-item">Code is inconsistently formatted and can be difficult to
-                                read.
-                            </li>
-                            <li class="list-group-item">Numerous variables are ambiguous (i.e. x) and do not
-                                indicate the purpose of the variable.
-                            </li>
+                            <li class="list-group-item">Variable names are ambiguous (eg. “x” or “i”).</li>
+                            <li class="list-group-item">Code is inconsistently formatted and difficult to read.</li>
+                            <li class="list-group-item">Code contains either a lack or excess of comments.</li>
                         </ul>
                     </label>
                 </td>
@@ -96,20 +136,27 @@
                            {% if grade.readability == 2 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="readability-2">
                         <ul class="list-group">
-                            <li class="list-group-item">The submitted project is well documented.</li>
-                            <li class="list-group-item">Code is properly formatted (i.e. indentation within brackets
-                                and appropriate spacing) and is easy to read.
-                            </li>
-                            <li class="list-group-item">All variables are self-documented (i.e. named in a way that
-                                the name indicated the purpose of the variable).
-                            </li>
+                            <li class="list-group-item">Variable names are appropriate.</li>
+                            <li class="list-group-item">Code formatting may be inconsistent or somewhat difficult to read.</li>
+                            <li class="list-group-item">For the most part, code is well documented with comments.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="readability" id="readability-3" value="3"
+                           {% if grade.readability == 3 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="readability-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">Code is properly formatted with indentation, spacing, etc.</li>
+                            <li class="list-group-item">Code contains easily understandable comments when appropriate.</li>
+                            <li class="list-group-item">All variables are self documented with appropriate names.</li>
                         </ul>
                     </label>
                 </td>
             </tr>
             <tr>
-                <th>Code Readability Comments</th>
-                <td colspan="3">
+                <th>Readability Comments</th>
+                <td colspan="4">
                         <textarea class="form-control" name="readability_comments"
                                   rows="3"
                                   {% if disabled %}disabled{% endif %}>{{ grade.readability_comments }}</textarea>
@@ -122,8 +169,8 @@
                            {% if grade.implementation == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="implementation-0">
                         <ul class="list-group">
-                            <li class="list-group-item">Code shows little to no thought about design.</li>
-                            <li class="list-group-item">Structures and data types are poorly chosen.</li>
+                            <li class="list-group-item">Code is written inefficiently.</li>
+                            <li class="list-group-item">Code is not organized or structured.</li>
                         </ul>
                     </label>
                 </td>
@@ -132,10 +179,8 @@
                            {% if grade.implementation == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="implementation-1">
                         <ul class="list-group">
-                            <li class="list-group-item">Code shows some thought about design.</li>
-                            <li class="list-group-item">Appropriate structures are often used but not consistently
-                                throughout the program.
-                            </li>
+                            <li class="list-group-item">Code shows little thought about organization.</li>
+                            <li class="list-group-item">Structures and data types are poorly chosen.</li>
                         </ul>
                     </label>
                 </td>
@@ -144,114 +189,29 @@
                            {% if grade.implementation == 2 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
                     <label for="implementation-2">
                         <ul class="list-group">
-                            <li class="list-group-item">The program effectively chooses and implements concepts that
-                                would best model and solve the problem.
-                            </li>
-                            <li class="list-group-item">Appropriate data types and data structures are chosen for
-                                all variables.
-                            </li>
-                            <li class="list-group-item">Code uses the most appropriate structures (i.e. inheritance,
-                                interfaces, recursion, etc.)
-                            </li>
+                            <li class="list-group-item">Code shows some thought about organization.</li>
+                            <li class="list-group-item">Appropriate structures are often used but not consistently throughout the program.</li>
+                        </ul>
+                    </label>
+                </td>
+                <td>
+                    <input type="radio" name="implementation" id="implementation-3" value="3"
+                           {% if grade.implementation == 3 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                    <label for="implementation-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">The program effectively chooses and implements concepts that would best model and solve the problem.</li>
+                            <li class="list-group-item">Appropriate data types and data structures are chosen for all variables.</li>
+                            <li class="list-group-item">Code uses the most appropriate structures (i.e. inheritance, interfaces, recursion, etc.)</li>
                         </ul>
                     </label>
                 </td>
             </tr>
             <tr>
                 <th>Implementation Comments</th>
-                <td colspan="3">
+                <td colspan="4">
                         <textarea class="form-control" name="implementation_comments"
                                   rows="3"
                                   {% if disabled %}disabled{% endif %}>{{ grade.implementation_comments }}</textarea>
-                </td>
-            </tr>
-            <tr>
-                <th>Creativity</th>
-                <td>
-                    <input type="radio" name="creativity" id="creativity-0" value="0"
-                           {% if grade.creativity == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="creativity-0">
-                        <ul class="list-group">
-                            <li class="list-group-item">Your game implements very few creative elements outside of
-                                what was included with the starter code.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-                <td>
-                    <input type="radio" name="creativity" id="creativity-1" value="1"
-                           {% if grade.creativity == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="creativity-1">
-                        <ul class="list-group">
-                            <li class="list-group-item">Your game begins to implement elements of creative game play
-                                outside of what was included with the starter code.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-                <td>
-                    <input type="radio" name="creativity" id="creativity-2" value="2"
-                           {% if grade.creativity == 2 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="creativity-2">
-                        <ul class="list-group">
-                            <li class="list-group-item">The game makes creative use of story or game play.</li>
-                            <li class="list-group-item">Your game implements several elements of creative game play
-                                outside of what was included with the starter code.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <th>Creativity Comments</th>
-                <td colspan="3">
-                        <textarea class="form-control" name="creativity_comments"
-                                  rows="3"
-                                  {% if disabled %}disabled{% endif %}>{{ grade.creativity_comments }}</textarea>
-                </td>
-            </tr>
-            <tr>
-                <th>Fun or Educational</th>
-                <td>
-                    <input type="radio" name="educational" id="educational-0" value="0"
-                           {% if grade.educational == 0 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="educational-0">
-                        <ul class="list-group">
-                            <li class="list-group-item">The game is neither fun to play nor demonstrates an
-                                educational purpose.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-                <td>
-                    <input type="radio" name="educational" id="educational-1" value="1"
-                           {% if grade.educational == 1 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="educational-1">
-                        <ul class="list-group">
-                            <li class="list-group-item">The game is somewhat fun to play or begins to demonstrate an
-                                educational purpose.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-                <td>
-                    <input type="radio" name="educational" id="educational-2" value="2"
-                           {% if grade.educational == 2 %}checked{% endif %} {% if disabled %}disabled{% endif %}>
-                    <label for="educational-2">
-                        <ul class="list-group">
-                            <li class="list-group-item">The game is fun to play or communicates an educational
-                                purpose.
-                            </li>
-                        </ul>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <th>Fun or Educational Comments</th>
-                <td colspan="3">
-                        <textarea class="form-control" name="educational_comments"
-                                  rows="3"
-                                  {% if disabled %}disabled{% endif %}>{{ grade.educational_comments }}</textarea>
                 </td>
             </tr>
             </tbody>

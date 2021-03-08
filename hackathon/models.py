@@ -103,19 +103,17 @@ class Grade(models.Model):
     grader = models.ForeignKey(Grader, on_delete=models.CASCADE)
     function = models.PositiveSmallIntegerField()
     function_comments = models.TextField(blank=True)
+    creativity = models.PositiveSmallIntegerField()
+    creativity_comments = models.TextField(blank=True)
     readability = models.PositiveSmallIntegerField()
     readability_comments = models.TextField(blank=True)
     implementation = models.PositiveSmallIntegerField()
     implementation_comments = models.TextField(blank=True)
-    creativity = models.PositiveSmallIntegerField()
-    creativity_comments = models.TextField(blank=True)
-    educational = models.PositiveSmallIntegerField()
-    educational_comments = models.TextField(blank=True)
     general_comments = models.TextField(blank=True)
 
     @property
     def score(self):
-        return self.function + self.readability + self.implementation + self.creativity + self.educational
+        return self.function + self.readability + self.implementation + self.creativity
 
     def __str__(self):
         return f'{self.submission.team} graded by {self.grader.name}'
