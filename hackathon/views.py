@@ -154,6 +154,16 @@ def bonus_image(request):
     return HttpResponse(template.render(context, request))
 
 
+@require_competitor
+def schedule(request):
+    template = loader.get_template('competitor/schedule.html')
+    context = {
+        'me': HackathonUser.get_for(request.user),
+        'page': 'schedule',
+    }
+    return HttpResponse(template.render(context, request))
+
+
 @require_grader
 def grader(request):
     template = loader.get_template('grader.html')

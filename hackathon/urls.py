@@ -23,6 +23,7 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('competitor', competitor, name='competitor'),
     path('bonus-image', bonus_image, name='bonus-image'),
+    path('schedule', schedule, name='schedule'),
     path('grader', grader, name='grader'),
     path('grade/<int:submission_id>', grade, name='grade'),
 ]
