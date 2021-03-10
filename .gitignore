@@ -6,3 +6,4 @@ hackathon/static/.sass-cache
 hackathon/static/bootstrap
 hackathon/static/bootstrap.css
 hackathon/static/bootstrap.css.map
+*.json
