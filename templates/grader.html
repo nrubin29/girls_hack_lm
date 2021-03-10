@@ -21,16 +21,18 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th width="55%">Team</th>
+                <th width="40%">Team Members</th>
+                <th width="20%">School</th>
                 <th width="10%">Score</th>
                 <th width="10%">Grades</th>
-                <th width="25%">Actions</th>
+                <th width="20%">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for submission in submissions %}
                 <tr>
-                    <td>{{ submission.team }}</td>
+                    <td>{{ submission.team.member_names }}</td>
+                    <td>{{ submission.team.school }}</td>
                     <td><span class="badge rounded-pill bg-primary">{{ submission.team.score }}</span></td>
                     <td>
                         <span class="badge rounded-pill bg-primary">{{ submission.grade_set.count }} grade{{ submission.grade_set.count | pluralize }}</span>

@@ -28,6 +28,8 @@ class HackathonUser(models.Model):
 
 
 class Team(models.Model):
+    school = models.CharField(max_length=128)
+
     @property
     def score(self):
         score = 0
@@ -51,8 +53,12 @@ class Team(models.Model):
 
         return score
 
-    def __str__(self):
+    @property
+    def member_names(self):
         return ', '.join(self.competitor_set.values_list('name', flat=True))
+
+    def __str__(self):
+        return f'{self.member_names} ({self.school})'
 
 
 class Competitor(HackathonUser):
