@@ -22,6 +22,7 @@ urlpatterns = [
     path('login', login, name='login'),
     path('logout', logout, name='logout'),
     path('competitor', competitor, name='competitor'),
+    path('rubric', rubric, name='rubric'),
     path('bonus-image', bonus_image, name='bonus-image'),
     path('schedule', schedule, name='schedule'),
     path('grader', grader, name='grader'),

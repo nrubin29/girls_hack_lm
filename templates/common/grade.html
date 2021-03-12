@@ -53,13 +53,15 @@
                     </label>
                 </td>
             </tr>
-            <tr>
-                <th>Function Comments</th>
-                <td colspan="4">
-                        <textarea class="form-control" name="function_comments"
-                                  rows="3" {% if disabled %}disabled{% endif %}>{{ grade.function_comments }}</textarea>
-                </td>
-            </tr>
+            {% if not no_comments %}
+                <tr>
+                    <th>Function Comments</th>
+                    <td colspan="4">
+                            <textarea class="form-control" name="function_comments"
+                                      rows="3" {% if disabled %}disabled{% endif %}>{{ grade.function_comments }}</textarea>
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Creativity</th>
                 <td>
@@ -100,14 +102,16 @@
                     </label>
                 </td>
             </tr>
-            <tr>
-                <th>Creativity Comments</th>
-                <td colspan="4">
-                        <textarea class="form-control" name="creativity_comments"
-                                  rows="3"
-                                  {% if disabled %}disabled{% endif %}>{{ grade.creativity_comments }}</textarea>
-                </td>
-            </tr>
+            {% if not no_comments %}
+                <tr>
+                    <th>Creativity Comments</th>
+                    <td colspan="4">
+                            <textarea class="form-control" name="creativity_comments"
+                                      rows="3"
+                                      {% if disabled %}disabled{% endif %}>{{ grade.creativity_comments }}</textarea>
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Readability</th>
                 <td>
@@ -154,14 +158,16 @@
                     </label>
                 </td>
             </tr>
-            <tr>
-                <th>Readability Comments</th>
-                <td colspan="4">
-                        <textarea class="form-control" name="readability_comments"
-                                  rows="3"
-                                  {% if disabled %}disabled{% endif %}>{{ grade.readability_comments }}</textarea>
-                </td>
-            </tr>
+            {% if not no_comments %}
+                <tr>
+                    <th>Readability Comments</th>
+                    <td colspan="4">
+                            <textarea class="form-control" name="readability_comments"
+                                      rows="3"
+                                      {% if disabled %}disabled{% endif %}>{{ grade.readability_comments }}</textarea>
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Implementation</th>
                 <td>
@@ -206,22 +212,26 @@
                     </label>
                 </td>
             </tr>
-            <tr>
-                <th>Implementation Comments</th>
-                <td colspan="4">
-                        <textarea class="form-control" name="implementation_comments"
-                                  rows="3"
-                                  {% if disabled %}disabled{% endif %}>{{ grade.implementation_comments }}</textarea>
-                </td>
-            </tr>
+            {% if not no_comments %}
+                <tr>
+                    <th>Implementation Comments</th>
+                    <td colspan="4">
+                            <textarea class="form-control" name="implementation_comments"
+                                      rows="3"
+                                      {% if disabled %}disabled{% endif %}>{{ grade.implementation_comments }}</textarea>
+                    </td>
+                </tr>
+            {% endif %}
             </tbody>
         </table>
     </div>
 </div>
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">General Comments</h5>
-        <textarea class="form-control" name="general_comments" rows="5"
-                  {% if disabled %}disabled{% endif %}>{{ grade.general_comments }}</textarea>
+{% if not no_comments %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">General Comments</h5>
+            <textarea class="form-control" name="general_comments" rows="5"
+                      {% if disabled %}disabled{% endif %}>{{ grade.general_comments }}</textarea>
+        </div>
     </div>
-</div>
+{% endif %}

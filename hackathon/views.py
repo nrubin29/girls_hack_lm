@@ -122,6 +122,16 @@ def end(request):
 
 
 @require_competitor
+def rubric(request):
+    template = loader.get_template('competitor/rubric.html')
+    context = {
+        'me': HackathonUser.get_for(request.user),
+        'page': 'rubric',
+    }
+    return HttpResponse(template.render(context, request))
+
+
+@require_competitor
 def bonus_image(request):
     success = None
     errors = None

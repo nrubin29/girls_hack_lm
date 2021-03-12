@@ -1,0 +1,11 @@
+{% extends 'competitor/competitor.html' %}
+
+{% block head %}
+    <title>Rubric - girls.hack(LM)</title>
+{% endblock %}
+
+{% block competitor_body %}
+    <div class="container">
+        {% include 'common/grade.html' with disabled=True no_comments=True %}
+    </div>
+{% endblock %}
